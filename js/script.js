@@ -15,11 +15,16 @@ const app = new Vue({
    methods: {
       getEmail() {
          axios.get("https://flynn.boolean.careers/exercises/api/random/mail").then((res) => {
-            console.log(res.data);
+            this.emails.push(res.data.response);
          });
+      },
+      getRandomEmails() {
+         for (let i = 0; i < 10; i++) {
+            this.getEmail();
+         }
       },
    },
    mounted() {
-      this.getEmail();
+      this.getRandomEmails();
    },
 });
