@@ -15,12 +15,14 @@ const app = new Vue({
    methods: {
       getEmail() {
          axios.get("https://flynn.boolean.careers/exercises/api/random/mail").then((res) => {
-            this.emails.push(res.data.response);
+            if (!this.emails.includes(res.data.response)) {
+               this.emails.push(res.data.response);
+            }
          });
       },
       getRandomEmails() {
          let i = 0;
-         while (i < 10 && !this.emails.some((em) => this.emails.includes(em))) {
+         while (i < 10) {
             this.getEmail();
             i++;
          }
